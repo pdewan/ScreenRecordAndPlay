@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="jna-3.5.2.jar"/>
-	<classpathentry kind="lib" path="logback-classic-1.1.2.jar"/>
-	<classpathentry kind="lib" path="logback-core-1.1.2.jar"/>
-	<classpathentry kind="lib" path="lwjgl.jar"/>
-	<classpathentry kind="lib" path="platform-3.5.2.jar"/>
-	<classpathentry kind="lib" path="vlcj-3.0.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="vlcj-3.0.1-sources.jar"/>
-	<classpathentry kind="lib" path="vlcj-3.0.1-test-sources.jar"/>
-	<classpathentry kind="lib" path="vlcj-3.0.1-tests.jar"/>
-	<classpathentry kind="lib" path="vlcj-3.0.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 [1.6.0_65-b14-462]"/>
+	<classpathentry kind="lib" path="lib/jna-3.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/logback-classic-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/logback-core-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/platform-3.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1-test-sources.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1-tests.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_45"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

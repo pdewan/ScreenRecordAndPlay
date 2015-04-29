@@ -1,4 +1,10 @@
 *.class
+Record20secs/lib
+VLCj/lib
+bin/*
+VLCj/bin/*
+Record20secs/bin/*
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
