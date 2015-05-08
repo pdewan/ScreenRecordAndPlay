@@ -3,6 +3,7 @@
 // https://github.com/caprica/vlcj/blob/master/src/test/java/uk/co/caprica/vlcj/test/screen/ScreenRecorder.java
 // NOTE: On Mac OS X, must use JRE version 6
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import uk.co.caprica.vlcj.binding.LibVlc;
@@ -20,7 +21,10 @@ public class VLCplayer {
 	
     private final EmbeddedMediaPlayer player;
     private static String source = "/Users/nicholasdillon/Documents/UNC/Research/participant16.wmv";
+//    private static String source = "../";
 
+    static File video;
+    static EmbeddedMediaPlayerComponent embeddedPlayerComponent;
 	public static void main (final String[] args) {
 		
 		// Overwrite source with demo video
@@ -29,15 +33,33 @@ public class VLCplayer {
 		baseName = baseName.substring(0, baseName.length() - 1 - 4);		// Remove /bin from path
 		source = baseName + "/../screencaptures/screencap-vid.mp4";
 		
-		File video = new File(source);
+		 video = new File(source);
 		if(!video.exists()) {
 			System.err.println("Specified video does not exist... aborting");
 			System.exit(0);
 		}
 		
+		File vlcHome = new File ("D:/Program Files/VideoLAN/VLC");
+		if (!vlcHome.exists()) {
+			System.err.println("No vlc home");
+		}
+		
+		
 	    // Instantiates VLC
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-		Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+//        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+        try {
+        	String fileName = vlcHome.getCanonicalPath();
+        			
+        		fileName =	"D:/Program Files/VideoLAN/VLC";
+			NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), 
+					fileName
+					);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 		
         // SCREEN VIEWING UILITIES
         SwingUtilities.invokeLater(new Runnable() {
@@ -54,17 +76,24 @@ public class VLCplayer {
 	VLCplayer() {
 	    Scanner keyboard = new Scanner(System.in);
 	    JFrame frame = new JFrame("VLC Java Player");
-	    EmbeddedMediaPlayerComponent component = new EmbeddedMediaPlayerComponent();
+	     embeddedPlayerComponent = new EmbeddedMediaPlayerComponent();
 	    
-	    player = component.getMediaPlayer();
+	    player = embeddedPlayerComponent.getMediaPlayer();
 	    
-	    frame.setContentPane(component);
+	    frame.setContentPane(embeddedPlayerComponent);
 	    frame.setLocation(50, 50);
 	    frame.setSize(850, 650);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setVisible(true);
 
-	    player.playMedia(source);
+//	    player.playMedia(source);
+	    try {
+			player.playMedia(video.getCanonicalPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	    while (!player.isPlaying()) { /* Wait until video is loaded */ };
 	    player.pause();
 	    int length = (int) player.getLength();
@@ -81,6 +110,13 @@ public class VLCplayer {
         	if(keyboard.hasNext()) input = keyboard.nextLine();
         	if(input == null || input.equalsIgnoreCase("quit")) {
         		System.exit(0);
+        	}
+        	if (input.equals("magnify")) {
+        		System.out.print("Magnifying... ");
+        		frame.setSize(2000, 1000);
+        		embeddedPlayerComponent.setSize(10000, 1000);
+        		frame.validate();
+
         	}
         	if(input.equalsIgnoreCase("play")) {
         		System.out.print("Playing... ");
